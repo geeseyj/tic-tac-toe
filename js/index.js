@@ -284,8 +284,12 @@ function updateScoreboard(){
   $( '#player2 > .score' ).text( players.player2.wins );
 }
 
+function showGameWon( player ) {
+ //to be continued...
+}
+
 function gameWon( player ) {
-  //showGameOver
+  showGameWon( player );
   player.wins += 1;
   updateScoreboard();
   resetBoard();
