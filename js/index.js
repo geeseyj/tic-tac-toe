@@ -4,28 +4,28 @@ var board, players, number_human_players, player_one_sign;
 //https://medium.freecodecamp.org/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37
 //Credit for the minimax algorithm should go to him. Thanks!
 
-//Ahmad Abdolsaheb's code :)
+//The following is Ahmad Abdolsaheb's code :)
 
 function emptyIndexies( board ) {
-    return board.filter(s => s != "O" && s != "X");
-  }
+  return board.filter(s => s != "O" && s != "X");
+}
 
 function winning( board, player ) {
-    if (
-      (board[0] == player && board[1] == player && board[2] == player) ||
-      (board[3] == player && board[4] == player && board[5] == player) ||
-      (board[6] == player && board[7] == player && board[8] == player) ||
-      (board[0] == player && board[3] == player && board[6] == player) ||
-      (board[1] == player && board[4] == player && board[7] == player) ||
-      (board[2] == player && board[5] == player && board[8] == player) ||
-      (board[0] == player && board[4] == player && board[8] == player) ||
-      (board[2] == player && board[4] == player && board[6] == player)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+  if (
+    (board[0] == player && board[1] == player && board[2] == player) ||
+    (board[3] == player && board[4] == player && board[5] == player) ||
+    (board[6] == player && board[7] == player && board[8] == player) ||
+    (board[0] == player && board[3] == player && board[6] == player) ||
+    (board[1] == player && board[4] == player && board[7] == player) ||
+    (board[2] == player && board[5] == player && board[8] == player) ||
+    (board[0] == player && board[4] == player && board[8] == player) ||
+    (board[2] == player && board[4] == player && board[6] == player)
+  ) {
+    return true;
+  } else {
+    return false;
   }
+}
 
 function minimax( newBoard, player ) {
   
