@@ -1,5 +1,3 @@
-var board, players, number_human_players, player_one_sign;
-
 //For the implementation of the game logic and minimax algorithm I leaned heavily on Ahmad Abdolsaheb's article here:
 //https://medium.freecodecamp.org/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37
 //Credit for the minimax algorithm should go to him. Thanks!
@@ -100,6 +98,8 @@ function minimax( newBoard, player ) {
 }
 
 //End Ahmad Abdolsaheb's code :) Thanks Ahmad!
+
+var board, players, number_human_players, player_one_sign;
 
 function writeBoard( board ) {
   var writeSpace = function( value, index ) {
