@@ -90,6 +90,18 @@
       justify-content: center;
       margin-top: 40px;
     }
+
+    .game-message {
+      text-align: center;
+      font-size: 30px;
+      transition: transform 1000ms, opacity 1000ms;
+      opacity: 0;
+
+      &.showing {
+        opacity: 1;
+        transform: translateY(-200px);
+      }
+    }
   }
 
   .button {

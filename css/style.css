@@ -64,6 +64,14 @@
       display: flex;
       justify-content: center;
       margin-top: 40px; }
+    .container .board-outer .game-message {
+      text-align: center;
+      font-size: 30px;
+      transition: transform 1000ms, opacity 1000ms;
+      opacity: 0; }
+      .container .board-outer .game-message.showing {
+        opacity: 1;
+        transform: translateY(-200px); }
   .container .button {
     color: #000;
     padding: 10px;
