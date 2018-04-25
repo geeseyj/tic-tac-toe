@@ -10,17 +10,36 @@
       flex-direction: column;
       justify-content: center;
       align-items: center; }
+      .container .controls .control#players {
+        transition: opacity 500ms; }
+        .container .controls .control#players.muted {
+          opacity: 0.2; }
       .container .controls .control h3,
       .container .controls .control .button {
         position: relative;
         top: 75px;
-        opacity: 0; }
+        opacity: 0;
+        transition: top 1250ms, opacity 1250ms;
+        transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
       .container .controls .control h3 {
         font-family: Montserrat;
         text-align: center;
         position: relative;
         top: 100px;
-        opacity: 0; }
+        opacity: 0;
+        transition-delay: 700ms; }
+        .container .controls .control h3.show {
+          top: 0px;
+          opacity: 1; }
+      .container .controls .control .button.show {
+        top: 0px;
+        opacity: 1; }
+      .container .controls .control .button:nth-child(1) {
+        transition-delay: 1500ms; }
+      .container .controls .control .button:nth-child(2) {
+        transition-delay: 1700ms; }
+      .container .controls .control .button:nth-child(3) {
+        transition-delay: 1900ms; }
       .container .controls .control .buttons-wrap {
         display: flex;
         justify-content: space-evenly;

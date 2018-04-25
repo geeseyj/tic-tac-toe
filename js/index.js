@@ -113,26 +113,8 @@ function writeBoard( board ) {
 }
 
 function showPlayersSelect() {
-  
-  $( '.player-option' ).click( selectPlayers );
-  var delay = 700;
-  var properties = { 
-    'top': '0px',
-    opacity: 1
-  }; 
-  
-  var options = { 
-    duration : 1250,
-    easing : 'easeOutBack'
-  };
-  
-  //prepare buttons
-  $( '.player-option').addClass( 'clickable hoverable' );
-  
-  $( '#players h3' ).delay( delay ).animate( properties, options );
-  $( '.player-option:first-child' ).delay( delay + 800 ).animate( properties, options );
-  $( '.player-option:last-child' ).delay( delay + 1000 ).animate( properties, options );
-  
+  $( '.player-option' ).click( selectPlayers ).addClass( 'show clickable hoverable' );
+  $( '#players h3' ).addClass( 'show' );
 }
 
 function showSignsSelect() {
@@ -157,10 +139,10 @@ function showSignsSelect() {
     easing : 'easeOutBack'
   };
   
-  $( '#signs h3' ).delay( delay ).animate( properties, options );
-  $( '.sign-option:first-child' ).delay( delay + 800 ).animate( properties, options );
-  $( '.sign-option:last-child' ).delay( delay + 1000 ).animate( properties, options );
-  $( '.go-back' ).delay( delay + 1200 ).animate( properties, options );
+  $( '#signs h3' ).addClass( 'show' ).removeClass( 'went-back' );
+  $( '.sign-option:first-child' ).addClass( 'show' ).removeClass( 'went-back' );
+  $( '.sign-option:last-child' ).addClass( 'show' ).removeClass( 'went-back' );
+  $( '.go-back' ).addClass( 'show' ).removeClass( 'went-back' );
   
 }
 
@@ -203,7 +185,7 @@ function selectPlayers(){
   
   this.classList.add( 'active' );
   $( '.player-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
-  $( '#players' ).animate( { 'opacity' : 0.2 }, 500 );
+  $( '#players' ).addClass( 'muted' );
   showSignsSelect();
   if ( this.id === "1-player" ) {
     number_human_players = 1;
@@ -223,12 +205,12 @@ function selectSign(){
 }
 
 function goBack(){
-  $( '#signs h3, #signs .button' ).animate( { 'opacity' : 0, 'top' : '75px' }, 500 );
+  $( '#signs h3, #signs .button' ).removeClass( 'show' );
   $( '.player-option.active' ).removeClass( 'active' );
   $( '.player-option' ).addClass( 'clickable hoverable' ); 
   $( '.sign-option, .go-back' ).removeClass( 'clickable hoverable' );
   $( '.player-option' ).click( selectPlayers );
-  $( '#players' ).animate( { 'opacity' : 1 }, 500 );
+  $( '#players' ).removeClass( 'muted' );
 }
 
 function startGame(){
