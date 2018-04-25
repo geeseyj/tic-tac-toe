@@ -130,8 +130,8 @@ function hideSettings() {
 
   var displayNoneSettings = function(){
     $( '.settings *').removeClass( 'show' );
-    $( '.settings' ).hide();
-    $( '.board-outer' ).show( 1000, startGame );
+    $( '.board-outer' ).addClass( 'show' );
+    startGame();
     $( '#reset > .button').addClass( 'show' );
   };
 

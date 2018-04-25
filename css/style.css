@@ -23,16 +23,16 @@
     position: relative;
     top: 75px;
     opacity: 0;
-    transition: top 0ms, opacity 0ms;
+    transition: top 500ms, opacity 500ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   .setting h3 {
     font-family: Montserrat;
     text-align: center;
     position: relative;
     top: 100px;
-    opacity: 0;
-    transition-delay: 700ms; }
+    opacity: 0; }
     .setting h3.show {
+      transition-delay: 700ms;
       transition-duration: 1250ms;
       top: 0px;
       opacity: 1; }
@@ -55,7 +55,14 @@
   margin-top: 20px; }
 
 .board-outer {
-  display: none; }
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 500ms 500ms; }
+  .board-outer.show {
+    z-index: 1;
+    opacity: 1; }
   .board-outer .scoreboard {
     display: flex;
     justify-content: space-evenly;
