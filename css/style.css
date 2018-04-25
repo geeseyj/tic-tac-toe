@@ -6,8 +6,6 @@
   flex-direction: column;
   justify-content: space-between;
   transition: opacity 700ms; }
-  .controls.hide {
-    opacity: 0; }
 
 .control {
   margin: 10px;
@@ -16,6 +14,8 @@
   justify-content: center;
   align-items: center;
   transition: opacity 500ms; }
+  .control.gone-back {
+    opacity: 0; }
   .control.muted {
     opacity: 0.2; }
   .control h3,
@@ -23,7 +23,7 @@
     position: relative;
     top: 75px;
     opacity: 0;
-    transition: top 1250ms, opacity 1250ms;
+    transition: top 0ms, opacity 0ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   .control h3 {
     font-family: Montserrat;
@@ -33,6 +33,7 @@
     opacity: 0;
     transition-delay: 700ms; }
     .control h3.show {
+      transition-duration: 1250ms;
       top: 0px;
       opacity: 1; }
   .control .buttons-wrap {
@@ -41,13 +42,14 @@
     min-width: 300px; }
   .control .button.show {
     top: 0px;
-    opacity: 1; }
-  .control .button:nth-child(1) {
-    transition-delay: 1500ms; }
-  .control .button:nth-child(2) {
-    transition-delay: 1700ms; }
-  .control .button:nth-child(3) {
-    transition-delay: 1900ms; }
+    opacity: 1;
+    transition-duration: 1250ms; }
+    .control .button.show:nth-child(1) {
+      transition-delay: 1500ms; }
+    .control .button.show:nth-child(2) {
+      transition-delay: 1700ms; }
+    .control .button.show:nth-child(3) {
+      transition-delay: 1900ms; }
 
 .go-back {
   margin-top: 20px; }

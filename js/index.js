@@ -118,6 +118,7 @@ function showPlayersSelect() {
 }
 
 function showSignsSelect() {
+  $( '#signs' ).removeClass( 'gone-back' );
   $( '.sign-option' ).click( selectSign );
   $( '.go-back' ).click( goBack );
   $( '.player-option' ).removeClass( 'clickable hoverable' );
@@ -128,13 +129,13 @@ function showSignsSelect() {
 function hideControls() {
 
   var displayNoneControls = function(){
+    $( '.controls *').removeClass( 'show' );
     $( '.controls' ).hide();
     $( '.board-outer' ).show( 1000, startGame );
     $( '#reset > .button').addClass( 'show' );
   };
 
   $( '.controls' ).addClass( 'hide' );
-  $( '.controls *').removeClass( 'show' );
 
   window.setTimeout( displayNoneControls, 800);
 
@@ -163,13 +164,19 @@ function selectSign(){
   
 }
 
-function goBack(){
+function resetSignsSectionStyles(){
   $( '#signs h3, #signs .button' ).removeClass( 'show' );
+  $( '.sign-option, .go-back' ).removeClass( 'clickable hoverable' );
+
+}
+
+function goBack(){
+  $( '#signs' ).addClass( 'gone-back' );
   $( '.player-option.active' ).removeClass( 'active' );
   $( '.player-option' ).addClass( 'clickable hoverable' ); 
-  $( '.sign-option, .go-back' ).removeClass( 'clickable hoverable' );
   $( '.player-option' ).click( selectPlayers );
   $( '#players' ).removeClass( 'muted' );
+  resetSignsSectionStyles();
 }
 
 function startGame(){

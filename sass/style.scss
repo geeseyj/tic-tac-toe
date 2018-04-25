@@ -7,10 +7,6 @@
   flex-direction: column;
   justify-content: space-between;
   transition: opacity 700ms;
-
-  &.hide {
-    opacity: 0;
-  }
 }
 
 .control {
@@ -20,6 +16,10 @@
   justify-content: center;
   align-items: center;
   transition: opacity 500ms;
+  
+  &.gone-back {
+    opacity: 0;
+  }
 
   &.muted {
     opacity: 0.2;
@@ -30,7 +30,7 @@
     position: relative;
     top: 75px;
     opacity: 0;
-    transition: top 1250ms, opacity 1250ms;
+    transition: top 0ms, opacity 0ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
@@ -43,6 +43,7 @@
     transition-delay: 700ms;
 
     &.show {
+      transition-duration: 1250ms;
       top: 0px;
       opacity: 1;
     }
@@ -59,18 +60,20 @@
     &.show {
       top: 0px;
       opacity: 1;
-    }
+      transition-duration: 1250ms;
+    
 
-    &:nth-child(1) {
-      transition-delay: 1500ms;
-    }
+      &:nth-child(1) {
+        transition-delay: 1500ms;
+      }
 
-    &:nth-child(2) {
-      transition-delay: 1700ms;
-    }
+      &:nth-child(2) {
+        transition-delay: 1700ms;
+      }
 
-    &:nth-child(3) {
-      transition-delay: 1900ms;
+      &:nth-child(3) {
+        transition-delay: 1900ms;
+      }
     }
   }
 }
