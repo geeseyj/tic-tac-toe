@@ -2,14 +2,14 @@
   font-family: Lato, sans-serif;
 }
 
-.controls {
+.settings {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: opacity 700ms;
 }
 
-.control {
+.setting {
   margin: 10px;
   display: flex;
   flex-direction: column;

@@ -126,18 +126,18 @@ function showSignsSelect() {
   $( '#signs h3, .sign-option, .go-back' ).addClass( 'show' );
 }
 
-function hideControls() {
+function hideSettings() {
 
-  var displayNoneControls = function(){
-    $( '.controls *').removeClass( 'show' );
-    $( '.controls' ).hide();
+  var displayNoneSettings = function(){
+    $( '.settings *').removeClass( 'show' );
+    $( '.settings' ).hide();
     $( '.board-outer' ).show( 1000, startGame );
     $( '#reset > .button').addClass( 'show' );
   };
 
-  $( '.controls' ).addClass( 'hide' );
+  $( '.settings' ).addClass( 'hide' );
 
-  window.setTimeout( displayNoneControls, 800);
+  window.setTimeout( displayNoneSettings, 800);
 
 }
 
@@ -159,7 +159,7 @@ function selectSign(){
   this.classList.add( 'active' );
   $( '.sign-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
   $( '#signs' ).addClass( 'muted' );  
-  hideControls();
+  hideSettings();
   player_one_sign = this.id;
   
 }
