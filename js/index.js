@@ -118,32 +118,11 @@ function showPlayersSelect() {
 }
 
 function showSignsSelect() {
-  
   $( '.sign-option' ).click( selectSign );
   $( '.go-back' ).click( goBack );
-  
-  //prepare buttons
   $( '.player-option' ).removeClass( 'clickable hoverable' );
   $( '.sign-option, .go-back' ).addClass( 'clickable hoverable' );
-  
-  //bring in the sign options
-  delay = 700;
-  
-  var properties = { 
-    'top': '0px',
-    opacity: 1
-  }; 
-  
-  var options = { 
-    duration : 1250,
-    easing : 'easeOutBack'
-  };
-  
-  $( '#signs h3' ).addClass( 'show' ).removeClass( 'went-back' );
-  $( '.sign-option:first-child' ).addClass( 'show' ).removeClass( 'went-back' );
-  $( '.sign-option:last-child' ).addClass( 'show' ).removeClass( 'went-back' );
-  $( '.go-back' ).addClass( 'show' ).removeClass( 'went-back' );
-  
+  $( '#signs h3, .sign-option, .go-back' ).addClass( 'show' );
 }
 
 function hideControls() {
