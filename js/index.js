@@ -130,13 +130,14 @@ function hideControls() {
   var displayNoneControls = function(){
     $( '.controls' ).hide();
     $( '.board-outer' ).show( 1000, startGame );
+    $( '#reset > .button').addClass( 'show' );
   };
 
   $( '.controls' ).addClass( 'hide' );
   $( '.controls *').removeClass( 'show' );
 
   window.setTimeout( displayNoneControls, 800);
-  
+
 }
 
 function selectPlayers(){

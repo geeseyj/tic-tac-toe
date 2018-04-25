@@ -129,6 +129,14 @@
     margin-top: 40px;
   }
 
+  .button {
+    position: relative;
+    top: 75px;
+    opacity: 0;
+    transition: top 1250ms, opacity 1250ms;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
   .game-message {
     text-align: center;
     font-size: 30px;
