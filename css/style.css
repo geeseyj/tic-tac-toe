@@ -4,18 +4,20 @@
 .controls {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; }
+  justify-content: space-between;
+  transition: opacity 700ms; }
+  .controls.hide {
+    opacity: 0; }
 
 .control {
   margin: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
-  .control#players {
-    transition: opacity 500ms; }
-    .control#players.muted {
-      opacity: 0.2; }
+  align-items: center;
+  transition: opacity 500ms; }
+  .control.muted {
+    opacity: 0.2; }
   .control h3,
   .control .button {
     position: relative;

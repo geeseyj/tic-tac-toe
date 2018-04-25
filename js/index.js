@@ -126,37 +126,16 @@ function showSignsSelect() {
 }
 
 function hideControls() {
-  
-  var delay = 700; 
-  
-  var properties = { 
-    'top': '75px',
-    opacity: 0
-  }; 
-  
-  var options = { 
-    duration : 1250,
-    easing : 'easeInElastic'
-  };
-  
+
   var displayNoneControls = function(){
     $( '.controls' ).hide();
     $( '.board-outer' ).show( 1000, startGame );
   };
-  
-  var go_back_options = {
-    duration : 1250,
-    easing : 'easeInElastic',
-    complete: displayNoneControls
-  };
-  
-  $( '#players h3' ).delay( delay ).animate( properties, options );
-  $( '.player-option:first-child' ).delay( delay + 100 ).animate( properties, options );
-  $( '.player-option:last-child' ).delay( delay + 150 ).animate( properties, options );
-  $( '#signs h3' ).delay( delay + 200 ).animate( properties, options );
-  $( '.sign-option:first-child' ).delay( delay + 250 ).animate( properties, options );
-  $( '.sign-option:last-child' ).delay( delay + 300 ).animate( properties, options );
-  $( '.go-back' ).delay( delay + 400 ).animate( properties, go_back_options );
+
+  $( '.controls' ).addClass( 'hide' );
+  $( '.controls *').removeClass( 'show' );
+
+  window.setTimeout( displayNoneControls, 800);
   
 }
 
@@ -177,7 +156,7 @@ function selectSign(){
   
   this.classList.add( 'active' );
   $( '.sign-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
-  $( '#signs' ).animate( { 'opacity' : 0.2 }, 500 );
+  $( '#signs' ).addClass( 'muted' );  
   hideControls();
   player_one_sign = this.id;
   
