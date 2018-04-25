@@ -112,7 +112,7 @@ function writeBoard( board ) {
   board.map(writeSpace);
 }
 
-function showPlayers() {
+function showPlayersSelect() {
   
   $( '.player-option' ).click( selectPlayers );
   var delay = 700;
@@ -135,7 +135,7 @@ function showPlayers() {
   
 }
 
-function showSigns() {
+function showSignsSelect() {
   
   $( '.sign-option' ).click( selectSign );
   $( '.go-back' ).click( goBack );
@@ -204,7 +204,7 @@ function selectPlayers(){
   this.classList.add( 'active' );
   $( '.player-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
   $( '#players' ).animate( { 'opacity' : 0.2 }, 500 );
-  showSigns();
+  showSignsSelect();
   if ( this.id === "1-player" ) {
     number_human_players = 1;
   } else {
@@ -346,5 +346,5 @@ function resetGameVariables() {
 
 $( document ).ready( function() {
   resetGameVariables();
-  showPlayers();
+  showPlayersSelect();
 });
