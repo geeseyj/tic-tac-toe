@@ -1,0 +1,18 @@
+.button {
+    color: #000;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 90px;
+    text-align: center;
+  
+    &.hoverable:hover,
+    &.active {
+        color: #fff;
+        background-color: #000;
+    }
+  
+    &.clickable {
+        cursor: pointer;
+    }
+}
