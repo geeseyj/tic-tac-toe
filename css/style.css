@@ -103,3 +103,6 @@
       background-color: #000; }
     .container .button.clickable {
       cursor: pointer; }
+
+* {
+  display: none; }
