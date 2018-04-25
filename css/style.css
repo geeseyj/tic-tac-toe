@@ -1,105 +1,110 @@
 .container {
   font-family: Lato, sans-serif; }
-  .container .controls {
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.control {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .control#players {
+    transition: opacity 500ms; }
+    .control#players.muted {
+      opacity: 0.2; }
+  .control h3,
+  .control .button {
+    position: relative;
+    top: 75px;
+    opacity: 0;
+    transition: top 1250ms, opacity 1250ms;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .control h3 {
+    font-family: Montserrat;
+    text-align: center;
+    position: relative;
+    top: 100px;
+    opacity: 0;
+    transition-delay: 700ms; }
+    .control h3.show {
+      top: 0px;
+      opacity: 1; }
+  .control .buttons-wrap {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between; }
-    .container .controls .control {
-      margin: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; }
-      .container .controls .control#players {
-        transition: opacity 500ms; }
-        .container .controls .control#players.muted {
-          opacity: 0.2; }
-      .container .controls .control h3,
-      .container .controls .control .button {
-        position: relative;
-        top: 75px;
-        opacity: 0;
-        transition: top 1250ms, opacity 1250ms;
-        transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-      .container .controls .control h3 {
-        font-family: Montserrat;
-        text-align: center;
-        position: relative;
-        top: 100px;
-        opacity: 0;
-        transition-delay: 700ms; }
-        .container .controls .control h3.show {
-          top: 0px;
-          opacity: 1; }
-      .container .controls .control .button.show {
-        top: 0px;
-        opacity: 1; }
-      .container .controls .control .button:nth-child(1) {
-        transition-delay: 1500ms; }
-      .container .controls .control .button:nth-child(2) {
-        transition-delay: 1700ms; }
-      .container .controls .control .button:nth-child(3) {
-        transition-delay: 1900ms; }
-      .container .controls .control .buttons-wrap {
-        display: flex;
-        justify-content: space-evenly;
-        min-width: 300px; }
-    .container .controls .go-back {
-      margin-top: 20px; }
-  .container .board-outer {
-    display: none; }
-    .container .board-outer .scoreboard {
-      display: flex;
-      justify-content: space-evenly;
-      margin-bottom: 40px;
-      align-items: center; }
-      .container .board-outer .scoreboard .player {
-        font-size: 20px;
-        text-align: center;
-        padding: 10px;
-        min-width: 90px;
-        transition: box-shadow 1000ms ease-in-out, transform 1000ms ease-in-out;
-        border-radius: 5px; }
-        .container .board-outer .scoreboard .player.turn {
-          box-shadow: 5px 5px 10px gray;
-          transform: translate(-3px, -3px); }
-    .container .board-outer .board {
-      height: 300px;
-      width: 300px;
-      background-color: #000;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-content: space-between; }
-      .container .board-outer .board .space {
-        background-color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 80px;
-        width: 98px;
-        height: 98px; }
-    .container .board-outer #reset {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px; }
-    .container .board-outer .game-message {
+    justify-content: space-evenly;
+    min-width: 300px; }
+  .control .button.show {
+    top: 0px;
+    opacity: 1; }
+  .control .button:nth-child(1) {
+    transition-delay: 1500ms; }
+  .control .button:nth-child(2) {
+    transition-delay: 1700ms; }
+  .control .button:nth-child(3) {
+    transition-delay: 1900ms; }
+
+.go-back {
+  margin-top: 20px; }
+
+.board-outer {
+  display: none; }
+  .board-outer .scoreboard {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 40px;
+    align-items: center; }
+    .board-outer .scoreboard .player {
+      font-size: 20px;
       text-align: center;
-      font-size: 30px;
-      transition: transform 1000ms, opacity 1000ms;
-      opacity: 0; }
-      .container .board-outer .game-message.showing {
-        opacity: 1;
-        transform: translateY(-200px); }
-  .container .button {
-    color: #000;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 5px;
-    width: 90px;
-    text-align: center; }
-    .container .button.hoverable:hover, .container .button.active {
-      color: #fff;
-      background-color: #000; }
-    .container .button.clickable {
-      cursor: pointer; }
+      padding: 10px;
+      min-width: 90px;
+      transition: box-shadow 1000ms ease-in-out, transform 1000ms ease-in-out;
+      border-radius: 5px; }
+      .board-outer .scoreboard .player.turn {
+        box-shadow: 5px 5px 10px gray;
+        transform: translate(-3px, -3px); }
+  .board-outer .board {
+    height: 300px;
+    width: 300px;
+    background-color: #000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between; }
+    .board-outer .board .space {
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 80px;
+      width: 98px;
+      height: 98px; }
+  .board-outer #reset {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px; }
+  .board-outer .game-message {
+    text-align: center;
+    font-size: 30px;
+    transition: transform 1000ms, opacity 1000ms;
+    opacity: 0; }
+    .board-outer .game-message.showing {
+      opacity: 1;
+      transform: translateY(-200px); }
+
+.button {
+  color: #000;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 90px;
+  text-align: center; }
+  .button.hoverable:hover, .button.active {
+    color: #fff;
+    background-color: #000; }
+  .button.clickable {
+    cursor: pointer; }
