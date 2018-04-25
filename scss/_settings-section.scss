@@ -6,11 +6,11 @@
 }
   
 .setting {
-    margin: 10px;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    margin: 10px;
     transition: opacity 500ms;
 
     &.gone-back {
@@ -28,20 +28,20 @@
         opacity: 0;
         transition: top 500ms, opacity 500ms;
         transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &.show {
+            top: 0px;
+            opacity: 1;
+            transition-duration: 1250ms;
+        }
     }
 
     h3 {
         font-family: Montserrat;
         text-align: center;
-        position: relative;
-        top: 100px;
-        opacity: 0;
         
         &.show {
-        transition-delay: 700ms;
-        transition-duration: 1250ms;
-        top: 0px;
-        opacity: 1;
+            transition-delay: 700ms;
         }
     }
 
@@ -51,25 +51,18 @@
         min-width: 300px;
     }
 
-    .button {
+    .button.show {
 
-        &.show {
-        top: 0px;
-        opacity: 1;
-        transition-duration: 1250ms;
-        
+        &:nth-child(1) {
+            transition-delay: 1500ms;
+        }
 
-            &:nth-child(1) {
-                transition-delay: 1500ms;
-            }
+        &:nth-child(2) {
+            transition-delay: 1700ms;
+        }
 
-            &:nth-child(2) {
-                transition-delay: 1700ms;
-            }
-
-            &:nth-child(3) {
-                transition-delay: 1900ms;
-            }
+        &:nth-child(3) {
+            transition-delay: 1900ms;
         }
     }
 }
