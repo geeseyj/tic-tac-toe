@@ -28,9 +28,9 @@ function winning( board, player ) {
 function minimax( newBoard, player ) {
   
   // human
-  var huPlayer = "O";
+  var huPlayer = players.player1.sign;
   // ai
-  var aiPlayer = "X";
+  var aiPlayer = players.player2.sign;
 
   //available spots
   var availSpots = emptyIndexies(newBoard);
@@ -99,7 +99,7 @@ function minimax( newBoard, player ) {
 
 //End Ahmad Abdolsaheb's code :) Thanks Ahmad!
 
-var board, players, number_human_players, player_one_sign;
+var board, players;
 
 function writeBoard( board ) {
   var writeSpace = function( value, index ) {
@@ -147,10 +147,8 @@ function selectPlayers(){
   $( '.player-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
   $( '#players' ).addClass( 'muted' );
   showSignsSelect();
-  if ( this.id === "1-player" ) {
-    number_human_players = 1;
-  } else {
-    number_human_players = 2;
+  if ( this.id === "2-player" ) {
+    players.player2.type = 'human';
   }
 }
 
@@ -160,8 +158,10 @@ function selectSign(){
   $( '.sign-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
   $( '#signs' ).addClass( 'muted' );  
   hideSettings();
-  player_one_sign = this.id;
-  
+  if ( this.id === 'O' ){
+    players.player1.sign = 'O';
+    players.player2.sign = 'X';
+  }
 }
 
 function resetSignsSectionStyles(){
@@ -195,8 +195,7 @@ function startTurn( player_key ){
 
 function userSelectSpace( event ){
   var player = event.data;
-  var id = this.id;
-  board[ id ] = player.sign;
+  board[ this.id ] = player.sign;
   this.textContent = player.sign;
   endUserTurn( player );
 }
