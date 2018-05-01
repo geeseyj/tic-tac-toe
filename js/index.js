@@ -129,10 +129,10 @@ function showSignsSelect() {
 function hideSettings() {
 
   var displayNoneSettings = function(){
-    $( '.settings *').removeClass( 'show' );
+    $( '.settings *').removeClass( 'show muted' );
     $( '.board-outer' ).addClass( 'show' );
     startGame();
-    $( '#reset > .button').addClass( 'show' );
+    $( '#reset > .button').addClass( 'show hoverable clickable' ).click( resetAll ) ;
   };
 
   $( '.settings' ).addClass( 'hide' );
@@ -213,7 +213,6 @@ function delayComputerTurn( player ) {
 
 function computerTurn( player ) {
   var computer_move = minimax( board, player.sign );
-  //console.log( computer_move );
   $( '#' + computer_move.index ).text( player.sign );
   board[ computer_move.index ] = player.sign;
   
@@ -289,6 +288,14 @@ function resetGameVariables() {
         'own_key' : 'player2'
       }
   };
+}
+
+function resetAll() {
+  resetBoard();
+  resetGameVariables();
+  $( '.board-outer' ).removeClass( 'show' );
+  $( '#reset > .button').removeClass( 'show hoverable clickable' ).off( 'click' );
+  showPlayersSelect();
 }
 
 $( document ).ready( function() {
