@@ -113,7 +113,7 @@ function writeBoard( board ) {
 }
 
 function showPlayersSelect() {
-  $( '.player-option' ).click( selectPlayers ).addClass( 'show clickable hoverable' );
+  $( '.player-option' ).click( selectPlayers ).removeClass('active').addClass( 'show clickable hoverable' );
   $( '#players h3' ).addClass( 'show' );
 }
 
@@ -122,7 +122,7 @@ function showSignsSelect() {
   $( '.sign-option' ).click( selectSign );
   $( '.go-back' ).click( goBack );
   $( '.player-option' ).removeClass( 'clickable hoverable' );
-  $( '.sign-option, .go-back' ).addClass( 'clickable hoverable' );
+  $( '.sign-option, .go-back' ).removeClass('active').addClass( 'clickable hoverable' );
   $( '#signs h3, .sign-option, .go-back' ).addClass( 'show' );
 }
 
@@ -141,7 +141,7 @@ function hideSettings() {
 
 }
 
-function selectPlayers(){
+function selectPlayers() {
   
   this.classList.add( 'active' );
   $( '.player-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
@@ -152,7 +152,7 @@ function selectPlayers(){
   }
 }
 
-function selectSign(){
+function selectSign() {
   
   this.classList.add( 'active' );
   $( '.sign-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
@@ -164,13 +164,13 @@ function selectSign(){
   }
 }
 
-function resetSignsSectionStyles(){
+function resetSignsSectionStyles() {
   $( '#signs h3, #signs .button' ).removeClass( 'show' );
   $( '.sign-option, .go-back' ).removeClass( 'clickable hoverable' );
 
 }
 
-function goBack(){
+function goBack() {
   $( '#signs' ).addClass( 'gone-back' );
   $( '.player-option.active' ).removeClass( 'active' );
   $( '.player-option' ).addClass( 'clickable hoverable' ); 
@@ -179,12 +179,12 @@ function goBack(){
   resetSignsSectionStyles();
 }
 
-function startGame(){
+function startGame() {
   var first_move_player_key = Math.round( Math.random() ) === 0 ? 'player1' : 'player2';
   startTurn( first_move_player_key );
 }
 
-function startTurn( player_key ){
+function startTurn( player_key ) {
   var player = players[ player_key ];
   if ( player.type === "human" ) {
     startUserTurn( player );
@@ -193,7 +193,7 @@ function startTurn( player_key ){
   }
 }
 
-function userSelectSpace( event ){
+function userSelectSpace( event ) {
   var player = event.data;
   board[ this.id ] = player.sign;
   this.textContent = player.sign;
@@ -225,7 +225,7 @@ function computerTurn( player ) {
   }
 }
 
-function updateScoreboard(){
+function updateScoreboard() {
   $( '#player1 > .score' ).text( players.player1.wins );
   $( '#player2 > .score' ).text( players.player2.wins );
 }
@@ -259,7 +259,7 @@ function endUserTurn( player ) {
   }
 }
 
-function startUserTurn( player ){
+function startUserTurn( player ) {
   indicateTurn( player );
   var available_spaces_selector = '#' + emptyIndexies( board ).join(", #");
   $( available_spaces_selector ).click( player, userSelectSpace );
