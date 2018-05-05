@@ -5,14 +5,15 @@
     border: 1px solid black;
     box-shadow: grey 5px 5px 10px;
     display: flex; 
-    height: 200px;
+    flex-direction: column;
     justify-content: center;
+    left: 50%;
     opacity: 1;
-    position: absolute;
-    right: 66px;
-    top: 0px;
-    width: 200px;
-    z-index: 0;
+    padding: 10%;
+    top: 50px;
+    transform: translate(-50%);
+    width: 50%;
+    z-index: -1;
 
     &.show {
         z-index: 2;

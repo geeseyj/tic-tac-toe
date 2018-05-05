@@ -1,11 +1,18 @@
 .board-outer {
-    top: 0px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 500ms 500ms;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 8px;
+    opacity: 0;
+    top: 0px;
+    transition: opacity 500ms, z-index 500ms;
+    width: 100%;
+    z-index: 0;
+    background-color: #fff;
   
     &.show {
+        transition: opacity 500ms 1300ms, z-index 500ms 1300ms;
         z-index: 1;
         opacity: 1;
     }
@@ -15,6 +22,7 @@
         justify-content: space-evenly;
         margin-bottom: 40px;
         align-items: center;
+        width: 100%;
       
         .player {
             font-size: 20px;
@@ -51,7 +59,7 @@
         }
     }
     
-    #reset {
+    .reset-button {
         display: flex;
         justify-content: center;
         margin-top: 40px;
