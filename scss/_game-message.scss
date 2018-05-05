@@ -8,7 +8,7 @@
     flex-direction: column;
     justify-content: center;
     left: 50%;
-    opacity: 1;
+    opacity: 0;
     padding: 10%;
     top: 50px;
     transform: translate(-50%);
@@ -17,5 +17,6 @@
 
     &.show {
         z-index: 2;
+        opacity: 1;
     }
 }
