@@ -137,8 +137,6 @@
     top: 75px;
     opacity: 0;
     transition-property: top, opacity;
-    transition-duration: 0ms, 0ms;
-    transition-delay: 800ms, 800ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275), cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .setting h3.show,
     .setting .button.show {

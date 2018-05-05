@@ -287,14 +287,20 @@ var Game = {
   },
   
   resetAll : function() {
-    Game.resetBoard();
     Game.resetGameVariables();
     $( '.board-outer' ).removeClass( 'show' );
-    $( '#reset > .button').removeClass( 'show hoverable clickable' ).off( 'click' );
+    $( '#reset > .button' ).removeClass( 'show hoverable clickable' ).off( 'click' );
+    $( '.settings' ).removeClass( 'hide' );
+    $( '.settings *' ).removeClass( 'active muted clickable hoverable show' );
+    window.setTimeout( Game.showPlayersSelect, 500 );
+  },
+
+  firstLoad : function() {
+    Game.resetGameVariables();
     Game.showPlayersSelect();
   },
 };
 
 $( document ).ready( function() {
-  Game.resetAll();
+  Game.firstLoad();
 });
