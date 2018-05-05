@@ -173,7 +173,6 @@ var Game = {
     $( '.player-option' ).addClass( 'clickable hoverable' ); 
     $( '.player-option' ).click( function() { Game.selectPlayers( this ); } );
     $( '#players' ).removeClass( 'muted' );
-    Game.resetSignsSectionStyles();
   },
 
   writeBoard : function( board ) {
@@ -194,11 +193,6 @@ var Game = {
   
     //allow time for the transition
     window.setTimeout( Game.startGame, 800);  
-  },
-
-  resetSignsSectionStyles : function() {
-    $( '#signs h3, #signs .button' ).removeClass( 'show' );
-    $( '.sign-option, .go-back' ).removeClass( 'clickable hoverable' );
   },
 
   startGame : function() {

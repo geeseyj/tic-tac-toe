@@ -124,8 +124,10 @@
   flex-direction: column;
   justify-content: center;
   margin: 10px;
-  transition: opacity 0ms 800ms; }
+  transition: opacity 1000ms 100ms; }
   .setting.gone-back {
+    transition-duration: 500ms;
+    transition-delay: 0ms;
     opacity: 0; }
   .setting.muted {
     transition-duration: 500ms;

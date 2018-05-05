@@ -18,9 +18,11 @@
     flex-direction: column;
     justify-content: center;
     margin: 10px;
-    transition: opacity 0ms 800ms;
+    transition: opacity 1000ms 100ms;
 
     &.gone-back {
+        transition-duration: 500ms;
+        transition-delay: 0ms;
         opacity: 0;
     }
 
