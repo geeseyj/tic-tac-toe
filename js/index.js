@@ -141,7 +141,7 @@ var Game = {
     Game.showSignsSelect();
     
     if ( element.id === "2-player" ) {
-      element.players.player2.type = 'human';
+      Game.players.player2.type = 'human';
     }
   },
 
