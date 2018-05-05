@@ -235,9 +235,9 @@ var Game = {
     $( '.space' ).off( 'click' );
     
     if ( winning( Game.board, player.sign ) ){
-      Game.gameWon( player );
+      Game.gameEnd( player );
     } else if ( emptyIndexies( Game.board ).length === 0 ) {
-      Game.gameDraw();
+      Game.gameEnd();
     } else {
       Game.startTurn( player.opponent_key );
     }
@@ -260,9 +260,9 @@ var Game = {
     Game.board[ computer_move.index ] = player.sign;
     
     if ( winning( Game.board, player.sign ) ){
-      Game.gameWon( player );
+      Game.gameEnd( player );
     } else if ( emptyIndexies( Game.board ).length === 0 ) {
-      Game.gameDraw();
+      Game.gameEnd();
     } else {
       Game.startTurn( player.opponent_key );
     }
@@ -273,21 +273,21 @@ var Game = {
     $( '#player2 > .score' ).text( Game.players.player2.wins + ' Win' + (Game.players.player2.wins !== 1 ? 's' : '') );
   },
 
-  gameWon : function( player ) {
-    Game.showGameWon( player );
-    player.wins += 1;
-    Game.updateScoreboard();
+  gameEnd : function( winner = 'none' ) {
+
+    Game.showGameEndMessage( winner );
+    
+    if ( winner !== 'none' ) {
+      winner.wins += 1;
+      Game.updateScoreboard();
+    }
+
     Game.resetBoard();
     Game.startGame();
   },
 
-  showGameWon : function( player ) {
-   //to be continued...
-  },
-
-  gameDraw : function() {
-    Game.resetBoard();
-    Game.startGame();
+  showGameEndMessage : function( winner = 'none' ) {
+    //
   },
   
   resetAll : function() {
