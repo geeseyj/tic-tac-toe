@@ -240,7 +240,7 @@ var Game = {
 
   delayComputerTurn : function( player ) {
     Game.indicateTurn( player );
-    window.setTimeout( Game.computerTurn, 2000, player );
+    window.setTimeout( Game.computerTurn, 300, player );
   },
 
   computerTurn : function( player ) {
