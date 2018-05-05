@@ -2,6 +2,14 @@
   font-family: Lato, sans-serif;
 }
 
-@import "settings-section";
+.container > * {
+  margin-top: 8px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
 @import "board-section";
 @import "buttons";
+@import "game-message";
+@import "settings-section";

@@ -1,0 +1,20 @@
+.game-message {
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: grey 5px 5px 10px;
+    display: flex; 
+    height: 200px;
+    justify-content: center;
+    opacity: 1;
+    position: absolute;
+    right: 66px;
+    top: 0px;
+    width: 200px;
+    z-index: 0;
+
+    &.show {
+        z-index: 2;
+    }
+}

@@ -1,56 +1,13 @@
 * {
   font-family: Lato, sans-serif; }
 
-.settings {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: opacity 700ms; }
-
-.setting {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 10px;
-  transition: opacity 500ms; }
-  .setting.gone-back {
-    opacity: 0; }
-  .setting.muted {
-    opacity: 0.2; }
-  .setting h3,
-  .setting .button {
-    position: relative;
-    top: 75px;
-    opacity: 0;
-    transition: top 500ms, opacity 500ms;
-    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    .setting h3.show,
-    .setting .button.show {
-      top: 0px;
-      opacity: 1;
-      transition-duration: 1250ms; }
-  .setting h3 {
-    font-family: Montserrat;
-    text-align: center; }
-    .setting h3.show {
-      transition-delay: 700ms; }
-  .setting .buttons-wrap {
-    display: flex;
-    justify-content: space-evenly;
-    min-width: 300px; }
-  .setting .button.show:nth-child(1) {
-    transition-delay: 1500ms; }
-  .setting .button.show:nth-child(2) {
-    transition-delay: 1700ms; }
-  .setting .button.show:nth-child(3) {
-    transition-delay: 1900ms; }
-
-.go-back {
-  margin-top: 20px; }
+.container > * {
+  margin-top: 8px;
+  position: absolute;
+  top: 0px;
+  left: 0px; }
 
 .board-outer {
-  position: absolute;
   top: 0px;
   z-index: -1;
   opacity: 0;
@@ -121,3 +78,71 @@
     background-color: #000; }
   .button.clickable {
     cursor: pointer; }
+
+.game-message {
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: grey 5px 5px 10px;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  opacity: 1;
+  position: absolute;
+  right: 66px;
+  top: 0px;
+  width: 200px;
+  z-index: 0; }
+  .game-message.show {
+    z-index: 2; }
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: opacity 700ms;
+  z-index: 1;
+  background-color: #fff; }
+
+.setting {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+  transition: opacity 500ms; }
+  .setting.gone-back {
+    opacity: 0; }
+  .setting.muted {
+    opacity: 0.2; }
+  .setting h3,
+  .setting .button {
+    position: relative;
+    top: 75px;
+    opacity: 0;
+    transition: top 500ms, opacity 500ms;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .setting h3.show,
+    .setting .button.show {
+      top: 0px;
+      opacity: 1;
+      transition-duration: 1250ms; }
+  .setting h3 {
+    font-family: Montserrat;
+    text-align: center; }
+    .setting h3.show {
+      transition-delay: 700ms; }
+  .setting .buttons-wrap {
+    display: flex;
+    justify-content: space-evenly;
+    min-width: 300px; }
+  .setting .button.show:nth-child(1) {
+    transition-delay: 1500ms; }
+  .setting .button.show:nth-child(2) {
+    transition-delay: 1700ms; }
+  .setting .button.show:nth-child(3) {
+    transition-delay: 1900ms; }
+
+.go-back {
+  margin-top: 20px; }
