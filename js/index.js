@@ -1,7 +1,6 @@
 //For the implementation of the game logic and minimax algorithm I leaned heavily on Ahmad Abdolsaheb's article here:
 //https://medium.freecodecamp.org/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37
 //Credit for the minimax algorithm should go to him. Thanks!
-
 //The following is Ahmad Abdolsaheb's code :)
 
 function emptyIndexies( board ) {
@@ -116,7 +115,7 @@ var Game = {
         'sign' : 'X',
         'wins' : 0,
         'opponent_key' : 'player2',
-        'own_key' : 'player1'
+        'own_key' : 'player1',
         }, 
       'player2' : {
         'type' : 'computer',
@@ -189,7 +188,7 @@ var Game = {
   hideSettings : function() {
     $( '.settings' ).addClass( 'hide' );
     $( '.board-outer' ).addClass( 'show' );
-    $( '#reset > .button').addClass( 'show hoverable clickable' ).click( Game.resetAll );
+    $( '#reset > .button' ).addClass( 'show hoverable clickable' ).click( Game.resetAll );
   
     //allow time for the transition
     window.setTimeout( Game.startGame, 800);  
