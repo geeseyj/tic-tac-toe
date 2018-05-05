@@ -270,17 +270,36 @@ var Game = {
       winner.wins += 1;
       Game.updateScoreboard();
     }
-
-    Game.resetBoard();
-    Game.startGame();
   },
 
   showGameEndMessage : function( winner = 'none' ) {
-    //
+    var game_end_message;
+    
+    if ( winner === 'none' ) {
+      game_end_message = "It's a Draw!";
+    } else if ( winner.type === 'computer' ) {
+      game_end_message = "The Computer Won!";
+    } else {
+      game_end_message = Game.getPlayerDisplayableName( winner ) + ' Won!';
+    }
+
+    $( '.game-message .message' ).html( game_end_message );
+    $( '.game-message' ).addClass( 'show' );
+    $( '.space' ).off( 'click' );
+    $( '.game-message .button' ).addClass( 'hoverable clickable' )
+    $( '.game-message .play-again' ).click( Game.playAgain );
+    $( '.game-message .reset-all' ).click( Game.resetAll );
+  },
+
+  playAgain : function() {
+    $( '.game-message' ).removeClass( 'show' );
+    Game.resetBoard();
+    Game.startGame();
   },
   
   resetAll : function() {
     Game.resetGameVariables();
+    $( '.game-message' ).removeClass( 'show' );
     $( '.board-outer' ).removeClass( 'show' );
     $( '#reset > .button' ).removeClass( 'show hoverable clickable' ).off( 'click' );
     $( '.settings' ).removeClass( 'hide' );
@@ -292,6 +311,11 @@ var Game = {
     Game.resetGameVariables();
     Game.showPlayersSelect();
   },
+
+  getPlayerDisplayableName : function( player ) {
+    var name = player.own_key;
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  }
 };
 
 $( document ).ready( function() {
