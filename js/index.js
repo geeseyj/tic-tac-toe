@@ -110,19 +110,21 @@ var Game = {
   resetGameVariables: function() {
     Game.resetBoard();
     Game.players = {
-      'player1' : {
-        'type' : 'human',
-        'sign' : 'X',
-        'wins' : 0,
-        'opponent_key' : 'player2',
-        'own_key' : 'player1',
+      player1 : {
+        type : 'human',
+        sign : 'X',
+        wins : 0,
+        opponent_key : 'player2',
+        own_key : 'player1',
+        display_name : 'Player1'
         }, 
-      'player2' : {
-        'type' : 'computer',
-        'sign' : 'O',
-        'wins' : 0,
-        'opponent_key' : 'player1',
-        'own_key' : 'player2'
+      player2 : {
+        type : 'computer',
+        sign : 'O',
+        wins : 0,
+        opponent_key : 'player1',
+        own_key : 'player2',
+        display_name : 'Computer'
       }
     }
   },
@@ -141,6 +143,7 @@ var Game = {
     
     if ( element.id === "2-player" ) {
       Game.players.player2.type = 'human';
+      Game.players.player2.display_name = 'Player2';
     }
   },
 
@@ -189,9 +192,14 @@ var Game = {
     $( '.settings' ).addClass( 'hide' );
     $( '.board-outer' ).addClass( 'show' );
     $( '#reset > .button' ).addClass( 'show hoverable clickable' ).click( Game.resetAll );
-  
+    Game.writeScoreboardNames();
     //allow time for the transition
     window.setTimeout( Game.startGame, 800);  
+  },
+
+  writeScoreboardNames : function() {
+    $( '.scoreboard #player1 .name' ).html( Game.players.player1.display_name );
+    $( '.scoreboard #player2 .name' ).html( Game.players.player2.display_name );
   },
 
   startGame : function() {
@@ -280,7 +288,7 @@ var Game = {
     } else if ( winner.type === 'computer' ) {
       game_end_message = "The Computer Won!";
     } else {
-      game_end_message = Game.getPlayerDisplayableName( winner ) + ' Won!';
+      game_end_message = winner.display_name + ' Won!';
     }
 
     $( '.game-message .message' ).html( game_end_message );
@@ -311,11 +319,6 @@ var Game = {
     Game.resetGameVariables();
     Game.showPlayersSelect();
   },
-
-  getPlayerDisplayableName : function( player ) {
-    var name = player.own_key;
-    return name.charAt(0).toUpperCase() + name.slice(1);
-  }
 };
 
 $( document ).ready( function() {
