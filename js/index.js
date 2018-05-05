@@ -146,7 +146,7 @@ var Game = {
   },
 
   showSignsSelect : function() {
-    $( '#signs' ).removeClass( 'gone-back' );
+    $( '#signs' ).removeClass( 'gone-back muted' );
     $( '.sign-option' ).click( function() { Game.selectSign( this ); } );
     $( '.go-back' ).click( Game.goBack );
     $( '.player-option' ).removeClass( 'clickable hoverable' );
@@ -188,16 +188,12 @@ var Game = {
   },
 
   hideSettings : function() {
-    var displayNoneSettings = function(){
-      $( '.settings *').removeClass( 'show muted' );
-      $( '.board-outer' ).addClass( 'show' );
-      Game.startGame();
-      $( '#reset > .button').addClass( 'show hoverable clickable' ).click( Game.resetAll );
-    };
-  
     $( '.settings' ).addClass( 'hide' );
+    $( '.board-outer' ).addClass( 'show' );
+    $( '#reset > .button').addClass( 'show hoverable clickable' ).click( Game.resetAll );
   
-    window.setTimeout( displayNoneSettings, 800);  
+    //allow time for the transition
+    window.setTimeout( Game.startGame, 800);  
   },
 
   resetSignsSectionStyles : function() {
