@@ -269,8 +269,8 @@ var Game = {
   },
 
   updateScoreboard : function() {
-    $( '#player1 > .score' ).text( Game.players.player1.wins );
-    $( '#player2 > .score' ).text( Game.players.player2.wins );
+    $( '#player1 > .score' ).text( Game.players.player1.wins + ' Win' + (Game.players.player1.wins !== 1 ? 's' : '') );
+    $( '#player2 > .score' ).text( Game.players.player2.wins + ' Win' + (Game.players.player2.wins !== 1 ? 's' : '') );
   },
 
   gameWon : function( player ) {
