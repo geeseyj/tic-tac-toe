@@ -99,8 +99,8 @@ function minimax( newBoard, player ) {
 //End Ahmad Abdolsaheb's code :) Thanks Ahmad!
 
 var Game = {
-  board: undefined,
-  players: undefined,
+  board: null,
+  players: null,
   
   resetBoard: function() {
     $( '.space' ).empty();
@@ -291,9 +291,9 @@ var Game = {
       game_end_message = winner.display_name + ' Won!';
     }
 
-    $( '.game-message .message' ).html( game_end_message );
-    $( '.game-message' ).addClass( 'show' );
     $( '.space' ).off( 'click' );
+    $( '.game-message' ).addClass( 'show' );
+    $( '.game-message .message' ).html( game_end_message );
     $( '.game-message .button' ).addClass( 'hoverable clickable' )
     $( '.game-message .play-again' ).click( Game.playAgain );
     $( '.game-message .reset-all' ).click( Game.resetAll );
@@ -307,8 +307,7 @@ var Game = {
   
   resetAll : function() {
     Game.resetGameVariables();
-    $( '.game-message' ).removeClass( 'show' );
-    $( '.board-outer' ).removeClass( 'show' );
+    $( '.game-message, .board-outer' ).removeClass( 'show' );
     $( '#reset > .button' ).removeClass( 'show hoverable clickable' ).off( 'click' );
     $( '.settings' ).removeClass( 'hide' );
     $( '.settings *' ).removeClass( 'active muted clickable hoverable show' );
