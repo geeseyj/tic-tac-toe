@@ -2,21 +2,20 @@
   font-family: Lato, sans-serif; }
 
 .container > * {
-  margin-top: 8px;
+  margin-top: 32px;
   position: absolute;
   top: 0px;
-  left: 0px; }
+  left: 50%;
+  transform: translate(-50%); }
 
 .board-outer {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 8px;
   opacity: 0;
-  top: 0px;
   transition: opacity 500ms, z-index 500ms;
-  width: 100%;
+  width: 300px;
   z-index: 0;
   background-color: #fff; }
   .board-outer.show {
@@ -65,14 +64,6 @@
     opacity: 0;
     transition: top 1250ms, opacity 1250ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-  .board-outer .game-message {
-    text-align: center;
-    font-size: 30px;
-    transition: transform 1000ms, opacity 1000ms;
-    opacity: 0; }
-    .board-outer .game-message.showing {
-      opacity: 1;
-      transform: translateY(-200px); }
 
 .button {
   color: #000;
@@ -97,8 +88,9 @@
   flex-direction: column;
   justify-content: center;
   left: 50%;
+  max-width: 160px;
   opacity: 0;
-  padding: 10%;
+  padding: 32px;
   top: 150px;
   transform: translate(-50%);
   width: 50%;
@@ -117,7 +109,8 @@
   justify-content: space-between;
   transition: opacity 700ms, z-index 0ms 800ms;
   z-index: 1;
-  background-color: #fff; }
+  background-color: #fff;
+  width: 300px; }
   .settings.hide {
     z-index: 0;
     opacity: 0; }
@@ -157,7 +150,7 @@
   .setting .buttons-wrap {
     display: flex;
     justify-content: space-evenly;
-    min-width: 300px; }
+    width: 100%; }
   .setting .button.show:nth-child(1) {
     transition-delay: 1500ms, 1500ms; }
   .setting .button.show:nth-child(2) {

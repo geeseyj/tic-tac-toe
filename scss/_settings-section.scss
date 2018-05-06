@@ -5,6 +5,7 @@
     transition: opacity 700ms, z-index 0ms 800ms;
     z-index: 1;
     background-color: #fff;
+    width: 300px;
 
     &.hide {
         z-index: 0;
@@ -61,7 +62,7 @@
     .buttons-wrap {
         display: flex;
         justify-content: space-evenly;
-        min-width: 300px;
+        width: 100%;
     }
 
     .button.show {
