@@ -193,6 +193,8 @@ var Game = {
     $( '.board-outer' ).addClass( 'show' );
     $( '#reset > .button' ).addClass( 'show hoverable clickable' ).click( Game.resetAll );
     Game.writeScoreboardNames();
+    Game.updateScoreboard();
+    
     //allow time for the transition
     window.setTimeout( Game.startGame, 800);  
   },
