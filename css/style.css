@@ -2,19 +2,18 @@
   font-family: Lato, sans-serif; }
 
 .container > * {
-  margin-top: 8px;
+  margin-top: 32px;
   position: absolute;
   top: 0px;
-  left: 0px; }
+  left: 50%;
+  transform: translate(-50%); }
 
 .board-outer {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 8px;
   opacity: 0;
-  top: 0px;
   transition: opacity 500ms, z-index 500ms;
   width: 100%;
   z-index: 0;
