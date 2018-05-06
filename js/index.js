@@ -214,7 +214,7 @@ var Game = {
     if ( player.type === "human" ) {
       Game.startUserTurn( player );
     } else {
-      Game.delayComputerTurn( player );
+      Game.handleComputerTurn( player );
     }
   },
   
@@ -248,9 +248,9 @@ var Game = {
     $( '#' + id_selector ).addClass( 'turn' );
   },
 
-  delayComputerTurn : function( player ) {
+  handleComputerTurn : function( player ) {
     Game.indicateTurn( player );
-    window.setTimeout( Game.computerTurn, 300, player );
+    window.setTimeout( Game.computerTurn, 500, player );
   },
 
   computerTurn : function( player ) {
