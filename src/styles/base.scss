@@ -1,0 +1,11 @@
+* {
+    font-family: Lato, sans-serif;
+}
+  
+.container > * {
+    margin-top: 32px;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate( -50% );
+}
