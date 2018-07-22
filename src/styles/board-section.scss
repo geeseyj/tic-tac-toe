@@ -54,6 +54,15 @@
             font-size: 80px;
             width: 98px;
             height: 98px;
+            color: #000;
+
+            &:empty {
+                color: transparent;
+            }
+
+            &.computer-selected {
+                transition: color 0ms 500ms;
+            }
         }
     }
     

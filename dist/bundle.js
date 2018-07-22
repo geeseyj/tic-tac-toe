@@ -88,9 +88,6 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
 __webpack_require__(1);
 __webpack_require__(6);
 __webpack_require__(8);
@@ -734,7 +731,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, ".board-outer {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  opacity: 0;\n  transition: opacity 500ms, z-index 500ms;\n  width: 300px;\n  z-index: 0;\n  background-color: #fff; }\n  .board-outer.show {\n    transition: opacity 500ms 1300ms, z-index 500ms 1300ms;\n    z-index: 1;\n    opacity: 1; }\n  .board-outer .scoreboard {\n    display: flex;\n    justify-content: space-evenly;\n    margin-bottom: 40px;\n    align-items: center;\n    width: 100%; }\n    .board-outer .scoreboard .player {\n      font-size: 20px;\n      text-align: center;\n      padding: 10px;\n      min-width: 90px;\n      transition: box-shadow 1000ms ease-in-out, transform 1000ms ease-in-out;\n      border-radius: 5px; }\n      .board-outer .scoreboard .player.turn {\n        box-shadow: 5px 5px 10px gray;\n        transform: translate(-3px, -3px); }\n  .board-outer .board {\n    height: 300px;\n    width: 300px;\n    background-color: #000;\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n    align-content: space-between; }\n    .board-outer .board .space {\n      background-color: #fff;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      font-size: 80px;\n      width: 98px;\n      height: 98px; }\n  .board-outer .reset-button {\n    display: flex;\n    justify-content: center;\n    margin-top: 40px; }\n  .board-outer .button {\n    position: relative;\n    top: 75px;\n    opacity: 0;\n    transition: top 1250ms, opacity 1250ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }\n", ""]);
+exports.push([module.i, ".board-outer {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  opacity: 0;\n  transition: opacity 500ms, z-index 500ms;\n  width: 300px;\n  z-index: 0;\n  background-color: #fff; }\n  .board-outer.show {\n    transition: opacity 500ms 1300ms, z-index 500ms 1300ms;\n    z-index: 1;\n    opacity: 1; }\n  .board-outer .scoreboard {\n    display: flex;\n    justify-content: space-evenly;\n    margin-bottom: 40px;\n    align-items: center;\n    width: 100%; }\n    .board-outer .scoreboard .player {\n      font-size: 20px;\n      text-align: center;\n      padding: 10px;\n      min-width: 90px;\n      transition: box-shadow 1000ms ease-in-out, transform 1000ms ease-in-out;\n      border-radius: 5px; }\n      .board-outer .scoreboard .player.turn {\n        box-shadow: 5px 5px 10px gray;\n        transform: translate(-3px, -3px); }\n  .board-outer .board {\n    height: 300px;\n    width: 300px;\n    background-color: #000;\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n    align-content: space-between; }\n    .board-outer .board .space {\n      background-color: #fff;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      font-size: 80px;\n      width: 98px;\n      height: 98px;\n      color: #000; }\n      .board-outer .board .space:empty {\n        color: transparent; }\n      .board-outer .board .space.computer-selected {\n        transition: color 0ms 500ms; }\n  .board-outer .reset-button {\n    display: flex;\n    justify-content: center;\n    margin-top: 40px; }\n  .board-outer .button {\n    position: relative;\n    top: 75px;\n    opacity: 0;\n    transition: top 1250ms, opacity 1250ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }\n", ""]);
 
 // exports
 
@@ -858,10 +855,7 @@ exports.push([module.i, ".settings {\n  display: flex;\n  flex-direction: column
 
 /***/ }),
 /* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
+/***/ (function(module, exports) {
 
 //For the implementation of the game logic and minimax algorithm I leaned heavily on Ahmad Abdolsaheb's article here:
 //https://medium.freecodecamp.org/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37
@@ -869,9 +863,7 @@ exports.push([module.i, ".settings {\n  display: flex;\n  flex-direction: column
 //The following is Ahmad Abdolsaheb's code :)
 
 function emptyIndexies(board) {
-  return board.filter(function (s) {
-    return s != "O" && s != "X";
-  });
+  return board.filter(s => s != "O" && s != "X");
 }
 
 function winning(board, player) {
@@ -959,13 +951,14 @@ function minimax(newBoard, player) {
 const Game = {
   board: null,
   players: null,
+  active_player_key: null,
 
-  resetBoard: function resetBoard() {
+  resetBoard: function () {
     $('.space').empty();
     this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   },
 
-  resetGameVariables: function resetGameVariables() {
+  resetGameVariables: function () {
     this.resetBoard();
     this.players = {
       player1: {
@@ -985,77 +978,69 @@ const Game = {
         display_name: 'Computer'
       }
     };
+    this.active_player_key = null;
   },
 
-  showPlayersSelect: function showPlayersSelect() {
-    var game_this = this;
-    $('.player-option').removeClass('active').addClass('show clickable hoverable').click(function () {
-      game_this.selectPlayers(this);
-    });
+  showPlayersSelect: function () {
+    $('.player-option').removeClass('active').addClass('show clickable hoverable').click(this.selectPlayers.bind(this));
     $('#players h3').addClass('show');
   },
 
-  selectPlayers: function selectPlayers(element) {
-    element.classList.add('active');
+  selectPlayers: function () {
+    event.target.classList.add('active');
     $('.player-option').off('click').removeClass('clickable hoverable');
     $('#players').addClass('muted');
 
     this.showSignsSelect();
 
-    if (element.id === "2-player") {
+    if (event.target.id === "2-player") {
       this.players.player2.type = 'human';
       this.players.player2.display_name = 'Player2';
     }
   },
 
-  showSignsSelect: function showSignsSelect() {
-    var game_this = this;
+  showSignsSelect: function () {
     $('#signs').removeClass('gone-back muted');
-    $('.sign-option').click(function () {
-      game_this.selectSign(this);
-    });
+    $('.sign-option').click(this.selectSign.bind(this));
     $('.go-back').click(this.goBack.bind(this));
     $('.player-option').removeClass('clickable hoverable');
     $('.sign-option, .go-back').removeClass('active').addClass('clickable hoverable');
     $('#signs h3, .sign-option, .go-back').addClass('show');
   },
 
-  selectSign: function selectSign(element) {
-    element.classList.add('active');
+  selectSign: function () {
+    event.target.classList.add('active');
     $('.sign-option').off('click').removeClass('clickable hoverable');
     $('#signs').addClass('muted');
 
     this.hideSettings();
 
-    if (element.id === 'O') {
+    if (event.target.id === 'O') {
       this.players.player1.sign = 'O';
       this.players.player2.sign = 'X';
     }
   },
 
-  goBack: function goBack() {
-    var game_this = this;
+  goBack: function () {
     $('#signs').addClass('gone-back');
     $('.player-option.active').removeClass('active');
     $('.player-option').addClass('clickable hoverable');
-    $('.player-option').click(function () {
-      game_this.selectPlayers(this);
-    });
+    $('.player-option').click(this.selectPlayers.bind(this));
     $('#players').removeClass('muted');
   },
 
-  writeBoard: function writeBoard(board) {
-    var writeSpace = function writeSpace(value, index) {
-      if (typeof value !== 'number') {
-        var selector = "#" + (index + 1);
-        $(selector).html(value);
-      }
-    };
+  // writeBoard : function( board ) {
+  //   var writeSpace = function( value, index ) {
+  //     if ( typeof value !== 'number') {
+  //       var selector = "#" + (index + 1);
+  //       $(selector).html(value);
+  //     }
+  //   };
 
-    board.map(writeSpace);
-  },
+  //   board.map( writeSpace );
+  // },
 
-  hideSettings: function hideSettings() {
+  hideSettings: function () {
     $('.settings').addClass('hide');
     $('.board-outer').addClass('show');
     $('#reset > .button').addClass('show hoverable clickable').click(this.resetAll);
@@ -1063,108 +1048,109 @@ const Game = {
     this.updateScoreboard();
 
     //allow time for the transition
-    window.setTimeout(this.startGame.bind(this), 800);
+    //window.setTimeout( this.startGame.bind( this ) , 800);  
+    this.startGame();
   },
 
-  writeScoreboardNames: function writeScoreboardNames() {
+  writeScoreboardNames: function () {
     $('.scoreboard #player1 .name').html(this.players.player1.display_name);
     $('.scoreboard #player2 .name').html(this.players.player2.display_name);
   },
 
-  startTurn: function startTurn(player_key) {
-    var player = this.players[player_key];
+  startTurn: function () {
+    var player = this.players[this.active_player_key];
     if (player.type === "human") {
-      this.startUserTurn(player);
+      this.startUserTurn();
     } else {
-      this.handleComputerTurn(player);
+      this.handleComputerTurn();
     }
   },
 
-  startGame: function startGame() {
-    var first_move_player_key = Math.round(Math.random()) === 0 ? 'player1' : 'player2';
-    this.startTurn(first_move_player_key);
+  startGame: function () {
+    this.active_player_key = /* Math.round( Math.random() ) === 0 ? */'player1' /* : 'player2' */;
+    this.startTurn();
   },
 
-  userSelectSpace: function userSelectSpace(player, element) {
-    this.board[element.id] = player.sign;
-    element.textContent = player.sign;
-    this.endUserTurn(player);
+  userSelectSpace: function () {
+    var player = this.players[this.active_player_key];
+    this.board[event.target.id] = player.sign;
+    event.target.textContent = player.sign;
+    this.endUserTurn();
   },
 
-  startUserTurn: function startUserTurn(player) {
-    var game_this = this;
-    this.indicateTurn(player);
+  startUserTurn: function () {
+    this.indicateTurn();
     var available_spaces_selector = '#' + emptyIndexies(this.board).join(", #");
-    $(available_spaces_selector).click(function () {
-      game_this.userSelectSpace(player, this);
-    });
+    $(available_spaces_selector).unbind('click').click(this.userSelectSpace.bind(this));
   },
 
-  endUserTurn: function endUserTurn(player) {
+  endUserTurn: function () {
     $('.space').off('click');
 
+    var player = this.players[this.active_player_key];
+
     if (winning(this.board, player.sign)) {
-      this.gameEnd(player);
+      this.gameEnd('won');
     } else if (emptyIndexies(this.board).length === 0) {
-      this.gameEnd();
+      this.gameEnd('tied');
     } else {
-      this.startTurn(player.opponent_key);
+      this.active_player_key = this.players[this.active_player_key].opponent_key;
+      this.startTurn();
     }
   },
 
-  indicateTurn: function indicateTurn(player) {
-    var id_selector = player.own_key;
+  indicateTurn: function () {
+    var id_selector = this.players[this.active_player_key].own_key;
     $('.player').removeClass('turn');
     $('#' + id_selector).addClass('turn');
   },
 
-  handleComputerTurn: function handleComputerTurn(player) {
-    this.indicateTurn(player);
-    window.setTimeout(this.computerTurn.bind(this), 500, player);
+  handleComputerTurn: function () {
+    this.indicateTurn();
+    this.computerTurn();
   },
 
-  computerTurn: function computerTurn(player) {
+  computerTurn: function () {
+    var player = this.players[this.active_player_key];
     var computer_move = minimax(this.board, player.sign);
-    $('#' + computer_move.index).text(player.sign);
+    $('#' + computer_move.index).addClass('computer-selected').text(player.sign);
     this.board[computer_move.index] = player.sign;
 
     if (winning(this.board, player.sign)) {
-      this.gameEnd(player);
+      this.gameEnd('won');
     } else if (emptyIndexies(this.board).length === 0) {
-      this.gameEnd();
+      this.gameEnd('tied');
     } else {
-      this.startTurn(player.opponent_key);
+      this.active_player_key = this.players[this.active_player_key].opponent_key;
+      this.startTurn();
     }
   },
 
-  updateScoreboard: function updateScoreboard() {
+  updateScoreboard: function () {
     $('#player1 > .score').text(this.players.player1.wins + ' Win' + (this.players.player1.wins !== 1 ? 's' : ''));
     $('#player2 > .score').text(this.players.player2.wins + ' Win' + (this.players.player2.wins !== 1 ? 's' : ''));
   },
 
-  gameEnd: function gameEnd() {
-    var winner = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'none';
+  gameEnd: function (state = 'tied') {
+    var player = this.players[this.active_player_key];
+    this.showGameEndMessage(state);
 
-
-    this.showGameEndMessage(winner);
-
-    if (winner !== 'none') {
-      winner.wins += 1;
+    if (state === "won") {
+      player.wins += 1;
       this.updateScoreboard();
     }
   },
 
-  showGameEndMessage: function showGameEndMessage() {
-    var winner = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'none';
-
+  showGameEndMessage: function (state = 'tied') {
     var game_end_message;
+    var player = this.players[this.active_player_key];
 
-    if (winner === 'none') {
+    if (state === 'tied') {
       game_end_message = "It's a Draw!";
-    } else if (winner.type === 'computer') {
+    } else if (player.type === 'computer') {
       game_end_message = "The Computer Won!";
     } else {
-      game_end_message = winner.display_name + ' Won!';
+      game_end_message = player.display_name + ' Won!';
     }
 
     $('.space').off('click');
@@ -1175,22 +1161,23 @@ const Game = {
     $('.game-message .reset-all').click(this.resetAll.bind(this));
   },
 
-  playAgain: function playAgain() {
+  playAgain: function () {
     $('.game-message').removeClass('show');
     this.resetBoard();
     this.startGame();
   },
 
-  resetAll: function resetAll() {
+  resetAll: function () {
     this.resetGameVariables();
     $('.game-message, .board-outer').removeClass('show');
     $('#reset > .button').removeClass('show hoverable clickable').off('click');
     $('.settings').removeClass('hide');
     $('.settings *').removeClass('active muted clickable hoverable show');
-    window.setTimeout(this.showPlayersSelect.bind(this), 500);
+    //window.setTimeout( this.showPlayersSelect.bind( this ), 500 );
+    this.showPlayersSelect();
   },
 
-  firstLoad: function firstLoad() {
+  firstLoad: function () {
     this.resetGameVariables();
     this.showPlayersSelect();
   }

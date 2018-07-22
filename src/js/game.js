@@ -101,6 +101,7 @@ function minimax( newBoard, player ) {
 const Game = {
   board: null,
   players: null,
+  active_player_key: null,
   
   resetBoard: function() {
     $( '.space' ).empty();
@@ -127,69 +128,67 @@ const Game = {
         display_name : 'Computer'
       }
     }
+    this.active_player_key = null;
   },
 
   showPlayersSelect: function() {
-    var game_this = this;
-    $( '.player-option' ).removeClass('active').addClass( 'show clickable hoverable' ).click( function() { game_this.selectPlayers( this ); } );
+    $( '.player-option' ).removeClass('active').addClass( 'show clickable hoverable' ).click( this.selectPlayers.bind( this ) );
     $( '#players h3' ).addClass( 'show' );
   },
 
-  selectPlayers : function( element ) {
-    element.classList.add( 'active' );
+  selectPlayers : function() {
+    event.target.classList.add( 'active' );
     $( '.player-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
     $( '#players' ).addClass( 'muted' );
 
     this.showSignsSelect();
     
-    if ( element.id === "2-player" ) {
+    if ( event.target.id === "2-player" ) {
       this.players.player2.type = 'human';
       this.players.player2.display_name = 'Player2';
     }
   },
 
   showSignsSelect : function() {
-    var game_this = this;
     $( '#signs' ).removeClass( 'gone-back muted' );
-    $( '.sign-option' ).click( function() { game_this.selectSign( this ); } );
+    $( '.sign-option' ).click( this.selectSign.bind( this ) );
     $( '.go-back' ).click( this.goBack.bind( this ) );
     $( '.player-option' ).removeClass( 'clickable hoverable' );
     $( '.sign-option, .go-back' ).removeClass( 'active' ).addClass( 'clickable hoverable' );
     $( '#signs h3, .sign-option, .go-back' ).addClass( 'show' );
   },
 
-  selectSign : function( element ) {
-    element.classList.add( 'active' );
+  selectSign : function() {
+    event.target.classList.add( 'active' );
     $( '.sign-option' ).off( 'click' ).removeClass( 'clickable hoverable' );
     $( '#signs' ).addClass( 'muted' );  
     
     this.hideSettings();
     
-    if ( element.id === 'O' ){
+    if ( event.target.id === 'O' ){
       this.players.player1.sign = 'O';
       this.players.player2.sign = 'X';
     }
   },
 
   goBack : function() {
-    var game_this = this;
     $( '#signs' ).addClass( 'gone-back' );
     $( '.player-option.active' ).removeClass( 'active' );
     $( '.player-option' ).addClass( 'clickable hoverable' ); 
-    $( '.player-option' ).click( function() { game_this.selectPlayers( this ); } );
+    $( '.player-option' ).click( this.selectPlayers.bind( this ) );
     $( '#players' ).removeClass( 'muted' );
   },
 
-  writeBoard : function( board ) {
-    var writeSpace = function( value, index ) {
-      if ( typeof value !== 'number') {
-        var selector = "#" + (index + 1);
-        $(selector).html(value);
-      }
-    };
+  // writeBoard : function( board ) {
+  //   var writeSpace = function( value, index ) {
+  //     if ( typeof value !== 'number') {
+  //       var selector = "#" + (index + 1);
+  //       $(selector).html(value);
+  //     }
+  //   };
 
-    board.map( writeSpace );
-  },
+  //   board.map( writeSpace );
+  // },
 
   hideSettings : function() {
     $( '.settings' ).addClass( 'hide' );
@@ -199,7 +198,8 @@ const Game = {
     this.updateScoreboard();
     
     //allow time for the transition
-    window.setTimeout( this.startGame.bind( this ) , 800);  
+    //window.setTimeout( this.startGame.bind( this ) , 800);  
+    this.startGame();  
   },
 
   writeScoreboardNames : function() {
@@ -207,67 +207,72 @@ const Game = {
     $( '.scoreboard #player2 .name' ).html( this.players.player2.display_name );
   },
 
-  startTurn : function( player_key ) {
-    var player = this.players[ player_key ];
+  startTurn : function() {
+    var player = this.players[ this.active_player_key ];
     if ( player.type === "human" ) {
-      this.startUserTurn( player );
+      this.startUserTurn();
     } else {
-      this.handleComputerTurn( player );
+      this.handleComputerTurn();
     }
   },
 
   startGame : function() {
-    var first_move_player_key = Math.round( Math.random() ) === 0 ? 'player1' : 'player2';
-    this.startTurn( first_move_player_key );
+    this.active_player_key =   /* Math.round( Math.random() ) === 0 ? */ 'player1' /* : 'player2' */ ;
+    this.startTurn();
   },
   
-  userSelectSpace : function( player, element ) {
-    this.board[ element.id ] = player.sign;
-    element.textContent = player.sign;
-    this.endUserTurn( player );
+  userSelectSpace : function () {
+    var player = this.players[ this.active_player_key ];
+    this.board[ event.target.id ] = player.sign;
+    event.target.textContent = player.sign;
+    this.endUserTurn();
   },
   
-  startUserTurn : function( player ) {
-    var game_this = this;
-    this.indicateTurn( player );
+  startUserTurn : function() {
+    this.indicateTurn();
     var available_spaces_selector = '#' + emptyIndexies( this.board ).join(", #");
-    $( available_spaces_selector ).click( function() { game_this.userSelectSpace( player, this); } );
+    $( available_spaces_selector ).unbind( 'click' ).click( this.userSelectSpace.bind( this ) );
   },
   
-  endUserTurn : function( player ) {
+  endUserTurn : function() {
     $( '.space' ).off( 'click' );
     
+    var player = this.players[ this.active_player_key ];
+
     if ( winning( this.board, player.sign ) ){
-      this.gameEnd( player );
+      this.gameEnd( 'won' );
     } else if ( emptyIndexies( this.board ).length === 0 ) {
-      this.gameEnd();
+      this.gameEnd( 'tied' );
     } else {
-      this.startTurn( player.opponent_key );
+      this.active_player_key = this.players[ this.active_player_key ].opponent_key;
+      this.startTurn();
     }
   },
 
-  indicateTurn : function( player ) {
-    var id_selector = player.own_key;
+  indicateTurn : function() {
+    var id_selector = this.players[ this.active_player_key ].own_key;
     $( '.player' ).removeClass( 'turn' );
     $( '#' + id_selector ).addClass( 'turn' );
   },
 
-  handleComputerTurn : function( player ) {
-    this.indicateTurn( player );
-    window.setTimeout( this.computerTurn.bind( this ), 500, player );
+  handleComputerTurn : function() {
+    this.indicateTurn();
+    this.computerTurn();
   },
 
-  computerTurn : function( player ) {
+  computerTurn : function() {
+    var player = this.players[ this.active_player_key ];
     var computer_move = minimax( this.board, player.sign );
-    $( '#' + computer_move.index ).text( player.sign );
+    $( '#' + computer_move.index ).addClass( 'computer-selected' ).text( player.sign );
     this.board[ computer_move.index ] = player.sign;
     
     if ( winning( this.board, player.sign ) ){
-      this.gameEnd( player );
+      this.gameEnd( 'won' );
     } else if ( emptyIndexies( this.board ).length === 0 ) {
-      this.gameEnd();
+      this.gameEnd( 'tied' );
     } else {
-      this.startTurn( player.opponent_key );
+      this.active_player_key = this.players[ this.active_player_key ].opponent_key;
+      this.startTurn();
     }
   },
 
@@ -276,25 +281,26 @@ const Game = {
     $( '#player2 > .score' ).text( this.players.player2.wins + ' Win' + (this.players.player2.wins !== 1 ? 's' : '') );
   },
 
-  gameEnd : function( winner = 'none' ) {
-
-    this.showGameEndMessage( winner );
+  gameEnd : function( state = 'tied' ) {
+    var player = this.players[ this.active_player_key ];
+    this.showGameEndMessage( state );
     
-    if ( winner !== 'none' ) {
-      winner.wins += 1;
+    if ( state === "won" ) {
+      player.wins += 1;
       this.updateScoreboard();
     }
   },
 
-  showGameEndMessage : function( winner = 'none' ) {
+  showGameEndMessage : function( state = 'tied' ) {
     var game_end_message;
+    var player = this.players[ this.active_player_key ];
     
-    if ( winner === 'none' ) {
+    if ( state === 'tied' ) {
       game_end_message = "It's a Draw!";
-    } else if ( winner.type === 'computer' ) {
+    } else if ( player.type === 'computer' ) {
       game_end_message = "The Computer Won!";
     } else {
-      game_end_message = winner.display_name + ' Won!';
+      game_end_message = player.display_name + ' Won!';
     }
 
     $( '.space' ).off( 'click' );
@@ -317,7 +323,8 @@ const Game = {
     $( '#reset > .button' ).removeClass( 'show hoverable clickable' ).off( 'click' );
     $( '.settings' ).removeClass( 'hide' );
     $( '.settings *' ).removeClass( 'active muted clickable hoverable show' );
-    window.setTimeout( this.showPlayersSelect.bind( this ), 500 );
+    //window.setTimeout( this.showPlayersSelect.bind( this ), 500 );
+    this.showPlayersSelect();
   },
 
   firstLoad : function() {
